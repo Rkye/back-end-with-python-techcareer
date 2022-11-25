@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% if product %}
+<h4>Ürün Adı: {{ product.name }} </h4>
+<hr>
+Ürün Resmi: <img src="/static/images/product images/{{ product.image }}">
+<hr>
+Ürün Özellikleri: {{ product.feature }}
+<hr>
+<h4>Fiyat: {{ product.price }} TL</h4>
+<hr>
+{% else %}
+<div class="alert alert-warning">Böyle bir ürün yoktur.</div>
+{% endif %}
+{% endblock %}

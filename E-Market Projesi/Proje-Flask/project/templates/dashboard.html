@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h3>Kontrol Paneli</h3>
+<hr>
+<a href="/addproduct" class="btn btn-dark">Ürün Ekle</a>
+<hr>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Ürün Adı</th>
+      <th scope="col">Ürün Foto</th>
+      <th scope="col">Ürün Özellik</th>
+      <th scope="col">Ürün Kategori</th>
+      <th scope="col">Ürün Miktarı</th>
+      <th scope="col">Ürün Fiyatı</th>
+    </tr>
+  </thead>
+
+{% if products %}
+
+<tbody>
+   {% for product in products %}
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.name }}</td>
+      <td><img src="/static/images/product images/{{ product.image }}"></td>
+      <td>{{ product.feature }}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.stokAdet }}</td>
+      <td>{{ product.price }} TL </td>
+      <td><a href="/updateProduct/{{product.id}}" class="btn btn-light">Güncelle</td>
+      <td><button type="button" class="btn btn-light" data-toggle="modal" data-target="#urunSilDash">Sil</button></td>
+      <div class="modal fade" id="urunSilDash">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dikkat!</h5>
+                        <button type="button" class="close" data-dismiss="modal"></button>
+                        <span>&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        {{product.name}} adlı ürünü silmek üzeresiniz. Devam etmek istiyor musunuz?
+                    </div>
+                    <div class="modal-footer">
+                        <button a href="/updateProduct/{{product.id}}" type="button" class="btn btn-danger">Sil</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </tr>
+   {% endfor %}
+</tbody>
+</table>
+{% else %}
+<div class="alert alert-danger"> Mağazada hiç ürün yok. </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h3>{{session["username"]}} 'in Sepeti</h3>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Ürün Adı</th>
+      <th scope="col">Ürün Fiyatı</th>
+      <th scope="col">Ürün Miktarı</th>
+    </tr>
+  </thead>
+
+{% if products %}
+
+  <tbody>
+  {% for product in products %}
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      
+      <input type="hidden" class="id" value="{{product.id}}"/>
+      <input type="text" class="product-quantity" name="quantity" value="1" size="2"/>
+    </tr>
+   {% endfor %}
+   
+  </tbody>
+</table>
+
+{% else %}
+
+<div class="alert alert-danger">Sepetinizde hiç ürün yok.</div>
+{% endif %}
+   <td><a href="/buy/{{product.id}}" class="btn btn-light">Satın Al</td>
+   <td><a href="/delete/{{product.id}}" class="btn btn-light">Sil</td>
+{% endblock %}
